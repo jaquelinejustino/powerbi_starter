@@ -1,0 +1,18 @@
+#dCalendario em DAX
+
+dCalendario = 
+ADDCOLUMNS(
+    CALENDAR(
+        DATE(2024,12,1), 
+        DATE(2025,12,1)
+    ),
+    "Ano", YEAR([Date]),
+    "Mes", MONTH([Date]),
+    "NomeMes", FORMAT([Date], "MMM"),
+    "Dia", DAY([Date]),
+    "DiaDaSemana", WEEKDAY([Date], 2),
+    "NomeDia", FORMAT([Date], "dddd"),
+    "AnoMes", FORMAT([Date], "YYYY-MM"),
+    "SemanaDoAno", WEEKNUM([Date], 2),
+    "DataFutura", IF([Date] <= TODAY(), "Não", "Sim")
+)
