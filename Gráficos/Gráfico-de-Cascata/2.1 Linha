@@ -1,0 +1,13 @@
+2.1 Linha = 
+
+VAR vContexto = 
+    SELECTEDVALUE(Tabela_Eixo[Id])
+
+VAR vResultado = 
+    IF(
+        vContexto >= 1,
+        [Medida1]
+    )
+
+RETURN
+    vResultado 
