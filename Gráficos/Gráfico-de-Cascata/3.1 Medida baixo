@@ -1,0 +1,17 @@
+3.1 Medida baixo = 
+
+VAR vContexto = 
+    SELECTEDVALUE(Tabela_Eixo[Id])
+
+VAR vMedida1 = [Medida1]
+
+VAR vMedida2 = [Medida2]
+
+VAR vResultado = 
+    IF(
+        vContexto = 3 && vMedida1 >= vMedida2,
+        vMedida2
+    )
+
+RETURN
+    vResultado
