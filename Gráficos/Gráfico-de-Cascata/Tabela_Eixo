@@ -1,0 +1,11 @@
+Tabela_Eixo = 
+
+DATATABLE(
+    "Medidas", STRING,
+    "Id", INTEGER,
+    {
+        { "Categoria1", 1 },
+        { "Categoria2",  2 },
+        { "",                    3 }
+    }
+)
