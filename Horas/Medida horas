@@ -1,0 +1,15 @@
+Calcular valor horas =
+
+VAR vValor = medida
+
+VAR vHoras = INT(vValor / 3600)
+VAR vModulo = MOD(vValor, 3600)
+VAR vMinutos = INT(vModulo / 60)
+VAR vSegundos = MOD(vValor, 60)
+
+RETURN
+    IF(
+        vValor = BLANK(),
+        0,
+        vHoras * 10000 + vMinutos * 100 + vSegundos
+    )
