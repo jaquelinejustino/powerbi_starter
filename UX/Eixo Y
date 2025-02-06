@@ -1,0 +1,24 @@
+Eixo Y dinâmico = 
+VAR vTabela = 
+	ALLSELECTED(dCalendario[Data])
+
+VAR vMaior_valor = 
+	MAXX(
+		vTabela, 
+		[medida
+  )
+
+VAR vdeslocamento = 
+	1.2 -- Valor ajustável
+
+return
+	vMaior_valor + vdeslocamento
+
+*******************************************************************
+
+Eixo Y Dinâmico = 
+CALCULATE(
+    MAXX(ALL(dCalendario[Data]), [medida]
+    ),
+    ALL(dCalendario)
+) * 1.2 -- Valor ajustável
