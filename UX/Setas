@@ -1,0 +1,13 @@
+Formato setas 
+
+
+VAR Medida = [medida]
+
+VAR Medida_Ajustada = 
+    IF(
+        Medida >=0,
+        FORMAT(Medida, "⮝ 0.00%"),
+        FORMAT(Medida, "⮟ 0.00%")
+    )
+RETURN 
+   """" & Medida_Ajustada & """"
