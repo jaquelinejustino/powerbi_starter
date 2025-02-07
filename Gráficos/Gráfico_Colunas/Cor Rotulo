@@ -1,0 +1,21 @@
+Cor Rotulo = 
+
+VAR vMaxAnoSemanaDia = 
+LOOKUPVALUE(
+    Calendario[AnoSemanaDiaInt], 
+    Calendario[Data], 
+    MAXX(ALLSELECTED(Calendario), Calendario[Data])
+)
+
+VAR vCor = 
+SWITCH(
+    TRUE(), 
+    HASONEVALUE(Calendario[DiaNum]) && SELECTEDVALUE(Calendario[DiaSemanaNum]) = 3, "#756A6A",
+    HASONEVALUE(Calendario[DiaNum]) && SELECTEDVALUE(Calendario[DiaSemanaNum]) = vMaxAnoSemanaDia, "#756A6A",
+    "#0000"
+    
+)
+
+RETURN
+
+vCor
