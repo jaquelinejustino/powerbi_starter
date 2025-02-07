@@ -1,0 +1,8 @@
+#Acumulado Semanal 
+
+Acumulado Semanal = 
+CALCULATE(
+    [medida],
+    ALL(Calendario),
+    VALUES(Calendario[SemanaNum])
+)
