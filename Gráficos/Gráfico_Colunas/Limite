@@ -1,0 +1,15 @@
+Limite = 
+
+VAR vMax = 
+MAXX(
+    ALLSELECTED(Calendario[SemanaNum], Calendario[MesNum], Calendario[DiaNum]), 
+    [Acumulado_Semanal]
+)
+
+VAR vTaxa = 1.5
+
+VAR vLimite = vMax * vTaxa
+
+RETURN
+
+vLimite
