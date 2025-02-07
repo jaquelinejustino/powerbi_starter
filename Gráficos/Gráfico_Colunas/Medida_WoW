@@ -1,0 +1,50 @@
+#Medida que calcula variação WoW
+
+Medida WoW = 
+
+var MaxSemanaContext = 
+MAXX(
+    CALCULATETABLE(
+        Calendario, 
+        Calendario[AnoNum] = MAX(Calendario[AnoNum])
+    ),
+    Calendario[SemanaNum]
+)
+
+var UltimaSemanaAno = 
+MAXX(
+    CALCULATETABLE(
+        ALL(Calendario), 
+        Calendario[AnoNum] = MAX(Calendario[AnoNum])
+    ), 
+    Calendario[SemanaNum]
+)
+
+var MaxDiaSemanaContext = 
+MAXX(
+    CALCULATETABLE(
+        Calendario, 
+        Calendario[AnoSemanaDiaINT] = MAX(Calendario[AnoSemanaDiaINT])
+    ), 
+    Calendario[DiaSemanaNum]
+)
+
+VAR QtdLastWeek = 
+CALCULATE(
+    [medida],
+    Calendario[AnoNum] = MAX(Calendario[AnoNum]),
+    Calendario[SemanaNum] = MaxSemanaContext - 1,
+    Calendario[DiaSemanaNum] <= MaxDiaSemanaContext
+)
+
+RETURN
+
+
+SWITCH(
+    TRUE(),
+    MaxSemanaContext = 1, "--",
+    MaxSemanaContext = 2, "--",
+    MaxSemanaContext = UltimaSemanaAno, "--",
+    ISBLANK(DIVIDE([Medida Week], QtdLastWeek)), "--",
+    DIVIDE([Medida Week], QtdLastWeek) - 1
+)
