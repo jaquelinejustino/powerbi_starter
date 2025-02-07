@@ -1,0 +1,6 @@
+#Média constante
+Media = 
+CALCULATE(
+    AVERAGE(Tabela[Coluna]),
+    ALL(dCalendario)
+)
