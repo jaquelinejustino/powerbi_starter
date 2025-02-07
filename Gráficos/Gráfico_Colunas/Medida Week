@@ -1,0 +1,5 @@
+Medida Week = 
+CALCULATE(
+    [medida],
+    Calendario[SemanaNum] = MAX(Calendario[SemanaNum])
+)
