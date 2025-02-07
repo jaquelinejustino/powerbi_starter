@@ -1,0 +1,17 @@
+-- Adiciona uma linha constante no gráfico com • apenas no primeiro dia.
+
+Rotulo Linha Média Primeiro Dia = 
+
+VAR PrimeiroDia = 
+    CALCULATE(
+        MIN(dCalendario[Data]),
+        ALLSELECTED(dCalendario)
+    )
+VAR ValorLinhaMedia = 
+    [Medida]
+RETURN
+    IF(
+        SELECTEDVALUE(dCalendario[Data]) = PrimeiroDia,
+        ValorLinhaMedia,
+        BLANK()
+    )
