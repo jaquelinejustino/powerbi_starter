@@ -1,0 +1,27 @@
+Rotulo Week = 
+
+var vValor = 
+[Acumulado_Semanal]
+    
+var vTaxaDeslocamento = [Limite] * 0.00
+
+var vPosicao = vValor + vTaxaDeslocamento
+
+VAR vMaxAnoSemanaDia = 
+LOOKUPVALUE(
+    Calendario[AnoSemanaDiaINT], 
+    Calendario[Data], 
+    MAXX(ALLSELECTED(Calendario), Calendario[Data])
+)
+
+VAR vValorDiaCerto = 
+SWITCH(
+    TRUE(), 
+    HASONEVALUE(Calendario[DiaNum]) && SELECTEDVALUE(Calendario[DiaSemanaNum]) = 3, vPosicao,
+    HASONEVALUE(Calendario[DiaNum]) && SELECTEDVALUE(Calendario[AnoSemanaDiaINT]) = vMaxAnoSemanaDia, vPosicao,
+    0
+)
+
+RETURN 
+
+vValorDiaCerto
