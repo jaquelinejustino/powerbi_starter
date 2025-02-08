@@ -1,0 +1,13 @@
+##Retorna a linha da tabela determinada pela sua posição **absoluta** ordenada por um critério especificado.
+
+[medida] do top dia da semana = 
+    CALCULATE ( 
+        [medida],
+        KEEPFILTERS (
+            INDEX (
+                1,
+                ALLSELECTED ( dCalendario[DiaNome] ),
+                ORDERBY ( [medida], DESC )
+            )
+        )
+    )
