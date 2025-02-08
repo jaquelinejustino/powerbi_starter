@@ -1,0 +1,10 @@
+## Retorna a linha da tabela determinada pela sua posição **absoluta** ordenada por um critério especificado
+
+Top dia = 
+    INDEX (
+        1,
+        ALLSELECTED ( dCalendario[DiaNome] ),
+        ORDERBY ( [medida], DESC )
+
+    )
+)
