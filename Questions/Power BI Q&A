@@ -1,0 +1,32 @@
+🔹 Power BI Interview Q&A 🔹
+
+1️⃣ What is the use case of the SUMMARIZE function?
+👉 It groups data by specified columns and applies aggregations. Similar to SQL GROUP BY.
+
+2️⃣ What is the need for a Data Master Table?
+👉 It acts as a single source of truth, ensuring consistency and reducing redundancy.
+
+3️⃣ What is Row Context in DAX?
+👉 It refers to the evaluation of DAX expressions for each row of a table, mainly in calculated columns and iterators like SUMX.
+
+4️⃣ What do MTD, QTD & YTD mean?
+👉 MTD (Month-to-Date): Cumulative data from the start of the month.
+👉 QTD (Quarter-to-Date): Cumulative data from the start of the quarter.
+👉 YTD (Year-to-Date): Cumulative data from the start of the year.
+
+5️⃣ How can you refresh data in Power BI?
+👉 Click Refresh in Power BI Desktop or set up Scheduled Refresh in Power BI Service.
+
+6️⃣ What is Scheduled Refresh & Incremental Refresh?
+👉 Scheduled Refresh: Automates data updates at set intervals.
+👉 Incremental Refresh: Loads only new/changed data instead of full dataset refresh, improving performance.
+
+7️⃣ How do you schedule automatic data refresh in Power BI Service?
+👉 In Power BI Service, go to Dataset → Scheduled Refresh → Configure Credentials & Refresh Frequency.
+
+8️⃣ How do you set up Incremental Refresh in Power BI Service?
+👉 Define RangeStart & RangeEnd parameters, enable Incremental Refresh in Power BI Desktop, and publish to Power BI Service.
+
+9️⃣ What are Power BI datasets, and how do they differ from data sources?
+👉 Datasets: Processed & stored data models used in Power BI reports.
+👉 Data Sources: The original location of raw data (SQL, Excel, APIs, etc.).
