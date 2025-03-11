@@ -16,3 +16,12 @@ ADDCOLUMNS(
     "SemanaDoAno", WEEKNUM([Date], 2),
     "DataFutura", IF([Date] <= TODAY(), "Não", "Sim")
 )
+--Nova Coluna
+SemanaDoMes = 
+VAR DiaDoMes = DAY('Tabela'[Data])
+VAR PrimeiroDiaMes = DATE(YEAR('Tabela'[Data]), MONTH('Tabela'[Data]), 1)
+VAR SemanaDoAno = WEEKNUM('Tabela'[Data], 2)  -- Considerando que a semana começa na segunda-feira
+VAR SemanaDoAnoPrimeiroDia = WEEKNUM(PrimeiroDiaMes, 2)
+
+RETURN 
+SemanaDoAno - SemanaDoAnoPrimeiroDia + 1
