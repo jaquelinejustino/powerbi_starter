@@ -1,0 +1,61 @@
+let
+    // Alterar somente a Tabela e a coluna de datas
+    MenorData = List.Min(Grid[Data]),
+    MaiorData = List.Max(Grid[Data]),
+              
+    // Criar lista de datas exatamente dentro do intervalo real da tabela Grid
+    Dias = Duration.Days(MaiorData - MenorData) + 1,
+    ListarDatas = List.Dates(MenorData, Dias, #duration(1,0,0,0)),
+
+    // Criar tabela de calendário apenas com as datas existentes
+    Tabela = #table(
+        type table[
+            Data = date,
+            AnoNum = Int64.Type,
+            MesNum = number,
+            SemanaNum = Int64.Type,
+            DiaNum = number,
+            DiaSemanaNum = Int64.Type,
+            AnoMesINT = number,
+            AnoSemanaINT = Int64.Type,
+            AnoSemanaDiaINT = Int64.Type,
+            MesNumSeq = Int64.Type,
+            MesAno = text,
+            NomeMes = text,
+            MesAbre = text,
+            NomeDia = text,
+            SemestreNum = text,
+            TrimestreNum = text,
+            BimestreNum = text,
+            Semestre = Int64.Type,
+            Trimestre = Int64.Type,
+            Bimestre = Int64.Type
+        ],
+        List.Transform(
+            ListarDatas,
+            each {
+                _,
+                Date.Year(_),
+                Date.Month(_),
+                Date.WeekOfYear(_, Day.Monday),
+                Date.Day(_),
+                Date.DayOfWeek(_, Day.Monday),
+                Date.Year(_) * 100 + Date.Month(_),
+                Date.Year(_) * 100 + Date.WeekOfYear(_, Day.Monday),
+                Date.Year(_) * 1000 + Date.WeekOfYear(_, Day.Monday) * 10 + Date.DayOfWeek(_, Day.Monday),
+                ((Date.Year(_) - Date.Year(MenorData)) * 12) + Date.Month(_),
+                Text.Proper(Text.Start(Date.MonthName(_), 3)) & "-" & Text.End(Text.From(Date.Year(_)), 2),
+                Text.Proper(Date.MonthName(_)),
+                Text.Proper(Text.Start(Date.MonthName(_), 3)),
+                Date.DayOfWeekName(_),
+                Text.From(Number.RoundUp(Date.Month(_) / 6, 0)) & "º Sem",
+                Text.From(Date.QuarterOfYear(_)) & "º Trim ",
+                Text.From(Number.RoundUp(Date.Month(_) / 2, 0)) & "º Bim",
+                Number.RoundUp(Date.Month(_) / 6, 0),
+                Date.QuarterOfYear(_),
+                Number.RoundUp(Date.Month(_) / 2, 0)
+            }
+        )
+    )
+in
+    Tabela
