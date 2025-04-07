@@ -1,0 +1,17 @@
+-- Rótulos 
+
+Data Labels Detail = 
+
+VAR _Value = 
+  calculate(
+[medida],
+allselected(dcalendar[month], dcalendar[month nr]),
+values(dcalendar[quarter)
+)
+VAR _ConditionVisibility = 
+MONTH(max(dcalendar[date] )) in {1,4,7,10}
+var  _result = 
+if(
+_ConditionVisibility, format(_Value, "#,###0")
+)
+return _result
