@@ -1,0 +1,13 @@
+-- Medida que retorna o máximo mensal
+
+Monthly Max - Start Quarter =
+
+VAR _conditionvisibility = 
+  MONTH( MAX( dCalendar[date] ) ) IN  {1,4,7,10}
+VAR _Result = 
+  IF(
+    _conditionvisibility, 
+    [Monthly Max]
+  )
+RETURN
+  _Result
