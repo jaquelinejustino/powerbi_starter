@@ -1,0 +1,13 @@
+-- Visibilidade dos rótulos
+
+Date Labels Value = 
+VAR _Quarter = MAX( dCalendar[Quarter] )
+VAR _ConditionVisibility =
+  MONTH( MAX( dCalendar[Date] ) ) IN {1,4,7,10}
+VAR _Result = 
+  IF(
+    _ConditionVisibility,
+    _Quarter
+  )
+RETURN
+_Result
