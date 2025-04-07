@@ -1,0 +1,6 @@
+-- Máximo Mensal
+
+MAXX(
+    ALLSELECTED(dCalendar[Month], dCalendar[Month Nr]),
+    [Medida colunas]
+)*1.65
