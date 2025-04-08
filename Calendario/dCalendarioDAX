@@ -1,0 +1,9 @@
+dCalendario DAX = 
+  CALENDAR ( 
+    DATE(YYYY,MM,DD), // Data inicial
+    DATE ( // Data final baseada na data máxima da coluna DataEmissao
+      YEAR(MAX(fTabela[Data])), 
+      MM, 
+      DD
+    ) 
+  )
