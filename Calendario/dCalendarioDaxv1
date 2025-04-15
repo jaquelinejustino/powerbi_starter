@@ -1,0 +1,66 @@
+Calendar_Table = 
+VAR _From = MIN(Opportunities[Harmonized Dates])
+VAR _To = MAX(Opportunities[Harmonized Dates])
+VAR _StartOfFiscalYear = 7
+VAR _Today = TODAY()
+
+RETURN
+ADDCOLUMNS(
+    CALENDAR(_From, _To),
+
+    // Data base
+    "Year", YEAR([Date]),
+    "Month", MONTH([Date]),
+    "Day", DAY([Date]),
+
+    // Início e fim de período
+    "Start of Year", DATE(YEAR([Date]), 1, 1),
+    "End of Year", DATE(YEAR([Date]), 12, 31),
+    "Start of Month", DATE(YEAR([Date]), MONTH([Date]), 1),
+    "End of Month", EOMONTH([Date], 0),
+    "Start of Quarter", DATE(YEAR([Date]), (QUARTER([Date]) * 3) - 2, 1),
+    "End of Quarter", EOMONTH(DATE(YEAR([Date]), QUARTER([Date]) * 3, 1), 0),
+    "Start of Week", [Date] - WEEKDAY([Date]) + 1,
+    "End of Week", [Date] + (7 - WEEKDAY([Date])),
+
+    // Informações por período
+    "Days in Month", DAY(EOMONTH([Date], 0)),
+    "Day of Year", DATEDIFF(DATE(YEAR([Date]), 1, 1), [Date], DAY) + 1,
+    "Day of Week", WEEKDAY([Date]),
+    "Week of Year", WEEKNUM([Date]),
+    
+    // Formatos e identificadores
+    "Year Month Number", INT(FORMAT([Date], "YYYYMM")),
+    "Year Month Name", FORMAT([Date], "YYYY-MMM"),
+    "Year Month Day Number", INT(FORMAT([Date], "YYYYMMDD")),
+    "Quarter", QUARTER([Date]),
+    "Quarter Name", "Q" & FORMAT([Date], "Q"),
+    "Year Quarter Number", INT(FORMAT([Date], "YYYYQ")),
+    "Year Quarter Name", FORMAT([Date], "YYYY") & " Q" & FORMAT([Date], "Q"),
+    
+    // Nomes de períodos
+    "Month Name", FORMAT([Date], "MMMM"),
+    "Month Name Short", FORMAT([Date], "MMM"),
+    "Day Name", FORMAT([Date], "DDDD"),
+    "Day Name Short", FORMAT([Date], "DDD"),
+
+    // Fiscais
+    "Fiscal Year", 
+        IF(
+            _StartOfFiscalYear = 1, 
+            YEAR([Date]), 
+            YEAR([Date]) + QUOTIENT(MONTH([Date]) + (13 - _StartOfFiscalYear), 13)
+        ),
+    "Fiscal Month", 
+        MOD(MONTH([Date]) + (13 - _StartOfFiscalYear) - 1, 12) + 1,
+    "Fiscal Quarter", 
+        QUARTER(
+            DATE(YEAR([Date]), MOD(MONTH([Date]) + (13 - _StartOfFiscalYear) - 1, 12) + 1, 1)
+        ),
+
+    // Diferenças relativas à data de hoje
+    "Day Offset", DATEDIFF(_Today, [Date], DAY),
+    "Month Offset", DATEDIFF(_Today, [Date], MONTH),
+    "Quarter Offset", DATEDIFF(_Today, [Date], QUARTER),
+    "Year Offset", DATEDIFF(_Today, [Date], YEAR)
+)
